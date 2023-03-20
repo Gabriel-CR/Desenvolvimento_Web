@@ -1,0 +1,9 @@
+.principal {
+  background: gray;
+  margin: 30px;
+  padding: 30px;
+}
+
+.principal > h1 {
+  margin-bottom: 50px;
+}

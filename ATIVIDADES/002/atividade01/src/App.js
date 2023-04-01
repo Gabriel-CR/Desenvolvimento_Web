@@ -12,11 +12,13 @@ function App() {
     <div className="App">
       {/* questao01 */}
       <Pai />
+      <hr />
 
       {/* questao02 */}
       <PC.Memoria nome="HiperX 2400Mhz" preco={240.0} />
       <PC.PlacaMae nome="Asrock A320M-HD" preco={528.0} />
       <PC.PlacadeVideo nome="RTX 3080 TI" preco={6240.48} />
+      <hr />
 
       {/* questao03 */}
       <World>

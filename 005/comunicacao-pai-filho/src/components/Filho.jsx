@@ -1,12 +1,20 @@
+import { useState } from "react";
+
 const Filho = ({ falarComPai }) => {
-  const acaoBotao = () => {
-    falarComPai("Oi Pai");
-  };
+  const [msg, setMsg] = useState("");
 
   return (
     <div>
       <h1>Filho</h1>
-      <button onClick={acaoBotao}>Enviar mensagem pro Pai</button>
+      <input
+        placeholder="Digite uma mensagem para seu pai"
+        type="text"
+        onChange={(e) => setMsg(e.target.value)}
+        value={msg}
+      />
+      <button onClick={() => falarComPai(msg)}>
+        Enviar mensagem para o Pai
+      </button>
     </div>
   );
 };

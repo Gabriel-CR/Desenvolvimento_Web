@@ -6,7 +6,7 @@ const Pai = () => {
 
   const mensagemDoFilho = (msg) => {
     alert("Meu filho disse: " + msg);
-    setNome("Gabriel");
+    setNome("Father");
   };
 
   return (

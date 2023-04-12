@@ -1,6 +1,7 @@
 import "./App.css";
 import Votacao from "./components/Votacao";
 import Pai from "./components/Pai";
+import VotacaoV2 from "./components/VotacaoV2";
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
       <h1>Atividade 03</h1>
       <hr />
       <h2>Questão 1</h2>
-      <Votacao />
+      {/* <Votacao /> */}
+      <VotacaoV2 />
       <hr />
       <h2>Questão 2</h2>
       <Pai />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const VotacaoV2 = () => {
   const [cidades, setCidades] = useState([
@@ -8,6 +8,29 @@ const VotacaoV2 = () => {
     { nome: "Sobral", votos: 0 },
   ]);
   const [flag, setFlag] = useState(true);
+  const [mais, setMais] = useState("");
+  const [menos, setMenos] = useState("");
+
+  useEffect(() => {
+    let maior = cidades[0].votos;
+    let menor = cidades[0].votos;
+
+    for (let i = 0; i < cidades.length; i++) {
+      if (cidades[i].votos > maior) maior = cidades[i].votos;
+      if (cidades[i].votos < menor) menor = cidades[i].votos;
+    }
+
+    setMais("");
+    setMenos("");
+    for (let i = 0; i < cidades.length; i++) {
+      if (cidades[i].votos === maior) {
+        setMais((prev) => `${prev} ${cidades[i].nome}`);
+      }
+      if (cidades[i].votos === menor) {
+        setMenos((prev) => `${prev} ${cidades[i].nome}`);
+      }
+    }
+  }, [cidades]);
 
   const votarNaCidade = (nome) => {
     const index = cidades.findIndex((cidade) => cidade.nome === nome);
@@ -40,17 +63,23 @@ const VotacaoV2 = () => {
         <h3>{`${cidades[3].nome}: ${cidades[3].votos}`}</h3> 
       */}
 
-      <button onClick={() => votarNaCidade("Fortaleza")}>
+      {cidades.map(({ nome }, key) => (
+        <button key={key} onClick={() => votarNaCidadeV2(nome)}>
+          Votar {nome}
+        </button>
+      ))}
+
+      {/* <button onClick={() => votarNaCidade("Fortaleza")}>
         Votar Fortaleza
       </button>
       <button onClick={() => votarNaCidade("Quixadá")}>Votar Quixadá</button>
       <button onClick={() => votarNaCidadeV2("Quixeramobim")}>
         Votar Quixeramobim
       </button>
-      <button onClick={() => votarNaCidadeV2("Sobral")}>Votar Sobral</button>
+      <button onClick={() => votarNaCidadeV2("Sobral")}>Votar Sobral</button> */}
 
-      <h3>Mais Votada:</h3>
-      <h3>Menos Votada:</h3>
+      <h3>Mais Votadas: {mais}</h3>
+      <h3>Menos Votadas: {menos}</h3>
     </div>
   );
 };

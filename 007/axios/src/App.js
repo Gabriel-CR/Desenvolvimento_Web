@@ -1,11 +1,11 @@
 import "./App.css";
-import FunctionAxios from "./components/FunctionAxios";
+import PokemonAxios from "./components/PokemonAxios";
 
 function App() {
   return (
     <div className="App">
       <h1>Axios</h1>
-      <FunctionAxios />
+      <PokemonAxios />
     </div>
   );
 }

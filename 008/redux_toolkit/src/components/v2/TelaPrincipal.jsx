@@ -4,25 +4,17 @@ import BotaoDecrementar from "./BotaoDecrementar";
 
 const TelaPrincipal = () => {
   return (
-    <>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <Image />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <BotaoIncrementar />
-            </td>
-            <td>
-              <BotaoDecrementar />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Image />
+      <BotaoIncrementar />
+      <BotaoDecrementar />
+    </div>
   );
 };
 

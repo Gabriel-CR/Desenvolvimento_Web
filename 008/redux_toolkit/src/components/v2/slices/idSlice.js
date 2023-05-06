@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: 100,
+  value: 150,
 };
 
 export const idSlice = createSlice({
@@ -14,9 +14,16 @@ export const idSlice = createSlice({
     decrementar: (state) => {
       state.value -= 1;
     },
+    incrementarValor: (state, action) => {
+      state.value += action.payload;
+    },
+    decrementarValor: (state, action) => {
+      state.value -= action.payload;
+    },
   },
 });
 
-export const { incrementar, decrementar } = idSlice.actions;
+export const { incrementar, decrementar, incrementarValor, decrementarValor } =
+  idSlice.actions;
 
 export default idSlice.reducer;

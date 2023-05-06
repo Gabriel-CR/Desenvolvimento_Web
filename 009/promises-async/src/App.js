@@ -1,11 +1,13 @@
 import "./App.css";
-import MinhaPromessa from "./components/MinhaPromessa";
+import MeuAsync from "./components/MeuAsync";
+// import MinhaPromessa from "./components/MinhaPromessa";
 
 function App() {
   return (
     <div className="App">
       <h1>Promises - async</h1>
-      <MinhaPromessa />
+      {/* <MinhaPromessa /> */}
+      <MeuAsync />
     </div>
   );
 }

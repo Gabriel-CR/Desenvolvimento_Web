@@ -49,16 +49,22 @@ const Questao03 = () => {
     setMenor(menor);
   }, [countries]);
 
+  // Calculei a maior e menor população no useEffect
+  // e armazenei no state maior e menor
+  // Agora é só exibir os dados
   return (
     <div>
       <h2>Questao 03</h2>
       {console.log({ maior })}
       {console.log({ menor })}
+      {/*Exibe maior e menor*/}
+      <p>Exibi no console</p>
+
       {/* <p>
-        Maior população: capital: {maior.capital} população: {maior.population}
-      </p> */}
-      {/*<p>
-        Menor população: capital: {menor.capital} população: {menor.population}
+        Maior: {maior.capital} - {maior.population}
+      </p>
+      <p>
+        Menor: {menor.capital} - {menor.population}
       </p> */}
     </div>
   );

@@ -1,29 +1,27 @@
 const professorService = require("../services/professor.service");
+const professorServiceMongo = require("../services/professor.service.mongo");
 
 var express = require("express");
 var router = express.Router();
 
 router.get("/listar", (req, res, next) => {
-  res.json(professorService.list());
+  professorServiceMongo.list(req, res);
 });
 
 router.post("/register", (req, res, next) => {
-  const professor = professorService.register(req.body);
-  res.json(professor);
-});
-
-router.put("/update/:id", (req, res, next) => {
-  const professor = professorService.update(req.params.id, req.body);
-  res.json(professor);
+  professorServiceMongo.register(req, res);
 });
 
 router.delete("/delete/:id", (req, res, next) => {
-  const ok = professorService.delete(req.params.id);
-  if (ok) {
-    res.json({ sucess: true });
-  } else {
-    res.json({ sucess: false });
-  }
+  professorServiceMongo.delete(req, res);
+});
+
+router.get("/recover/:id", (req, res, next) => {
+  professorServiceMongo.retrive(req, res);
+});
+
+router.put("/update/:id", (req, res, next) => {
+  professorServiceMongo.update(req, res);
 });
 
 router.get("/retrive/:id", (req, res, next) => {

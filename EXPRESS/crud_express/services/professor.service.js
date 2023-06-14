@@ -57,6 +57,14 @@ class ProfessorService {
     return professor;
   }
 
+  static recuperar(id) {
+    for (let i = 0; i < professores.length; i++) {
+      if (professores[i].id == id) {
+        return professores[i];
+      }
+    }
+  }
+
   static update(id, data) {
     for (let professor of professores) {
       if (professor.id == id) {

@@ -36,7 +36,7 @@ const Editar = () => {
         setAi(response.data.ai);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

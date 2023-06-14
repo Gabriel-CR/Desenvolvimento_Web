@@ -39,33 +39,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Listar = () => {
-  // const professores = [
-  //   { id: 0, nome: "Vito Corleone", curso: "SI", titulacao: "MEST" },
-  //   { id: 1, nome: "Michael Corleone", curso: "DD", titulacao: "GRAD" },
-  //   { id: 2, nome: "Luca Brasi", curso: "SI", titulacao: "MEST" },
-  //   { id: 3, nome: "Kay Adams", curso: "SI", titulacao: "DOUT" },
-  //   { id: 4, nome: "Peter Clemenza", curso: "CC", titulacao: "MEST" },
-  // ];
-
-  const [professores, setProfessores] = useState([]);
+  const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3005/professor/listar`)
-      .then((response) => setProfessores(response.data))
+      .get(`http://localhost:3005/aluno/listar`)
+      .then((response) => setAlunos(response.data))
       .catch((error) => console.log(error));
   }, []);
 
-  const deleteProfessorById = (id) => {
+  const deleteAlunoById = (id) => {
     if (window.confirm("Deseja excluir")) {
-      // alert(`Professor ${id} exluído com sucesso`);
       axios
-        .delete(`http://localhost:3005/professor/delete/${id}`)
+        .delete(`http://localhost:3005/aluno/delete/${id}`)
         .then((response) => {
-          alert(`Professor ${response.data.nome} excluído com sucesso`);
-          setProfessores(
-            professores.filter((professor) => professor._id !== id)
-          );
+          alert(`Aluno ${response.data.nome} excluído com sucesso`);
+          setAlunos(alunos.filter((professor) => professor._id !== id));
         })
         .catch((error) => console.log(error));
     }
@@ -74,7 +63,7 @@ const Listar = () => {
   return (
     <>
       <Typography variant="h5" fontWeight="bold">
-        Listar Professor
+        Listar Aluno
       </Typography>
       <TableContainer component={Paper} sx={{ mt: 4, mb: 4 }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -83,32 +72,32 @@ const Listar = () => {
               <StyledTableCell align="center">ID</StyledTableCell>
               <StyledTableCell>NOME</StyledTableCell>
               <StyledTableCell>CURSO</StyledTableCell>
-              <StyledTableCell>TITULAÇÃO</StyledTableCell>
+              <StyledTableCell>IRA</StyledTableCell>
               <StyledTableCell>AÇÕES</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {professores.map(({ _id, nome, curso, titulacao }) => {
+            {alunos.map(({ _id, nome, curso, ira }) => {
               return (
                 <StyledTableRow key={_id}>
                   <StyledTableCell>{_id}</StyledTableCell>
                   <StyledTableCell>{nome}</StyledTableCell>
                   <StyledTableCell>{curso}</StyledTableCell>
-                  <StyledTableCell>{titulacao}</StyledTableCell>
+                  <StyledTableCell>{ira}</StyledTableCell>
                   <StyledTableCell>
                     <Box>
                       <IconButton
                         aria-label="edit"
                         color="primary"
                         component={Link}
-                        to={`/editarProfessor/${_id}`}
+                        to={`/editarAluno/${_id}`}
                       >
                         <EditIcon />
                       </IconButton>
                       <IconButton
                         aria-label="delete"
                         color="error"
-                        onClick={() => deleteProfessorById(_id)}
+                        onClick={() => deleteAlunoById(_id)}
                       >
                         <DeleteIcon />
                       </IconButton>

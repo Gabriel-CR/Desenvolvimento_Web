@@ -12,70 +12,42 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Editar = () => {
   const [nome, setNome] = useState("");
   const [curso, setCurso] = useState("");
   const [titulacao, setTitulacao] = useState("GRAD");
   const [ai, setAi] = useState({ cg: false, mc: false, al: false, es: false });
+  const navigate = useNavigate();
 
   let { id } = useParams();
 
   useEffect(() => {
-    const { nome, curso, titulacao, ai } = getProfessorById(id);
-    setNome(nome);
-    setCurso(curso);
-    setTitulacao(titulacao);
-    setAi(ai);
+    // const { nome, curso, titulacao, ai } = getProfessorById(id);
+    axios
+      .get(`http://localhost:3005/professor/recover/${id}`)
+      .then((response) => {
+        setNome(response.data.nome);
+        setCurso(response.data.curso);
+        setTitulacao(response.data.titulacao);
+        setAi(response.data.ai);
+      })
+      .catch((error) => console.log(error));
   }, []);
-
-  const professores = [
-    {
-      id: 0,
-      nome: "Vito Corleone",
-      curso: "SI",
-      titulacao: "MEST",
-      ai: { cg: true, mc: false, al: false, es: false },
-    },
-    {
-      id: 1,
-      nome: "Michael Corleone",
-      curso: "DD",
-      titulacao: "GRAD",
-      ai: { cg: false, mc: false, al: false, es: false },
-    },
-    {
-      id: 2,
-      nome: "Luca Brasi",
-      curso: "SI",
-      titulacao: "MEST",
-      ai: { cg: false, mc: false, al: true, es: false },
-    },
-    {
-      id: 3,
-      nome: "Kay Adams",
-      curso: "SI",
-      titulacao: "DOUT",
-      ai: { cg: false, mc: true, al: false, es: false },
-    },
-    {
-      id: 4,
-      nome: "Peter Clemenza",
-      curso: "CC",
-      titulacao: "MEST",
-      ai: { cg: true, mc: false, al: false, es: false },
-    },
-  ];
-
-  const getProfessorById = (id) => {
-    return professores.find((professor) => professor.id == id) || null;
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ nome, curso, titulacao, ai });
+    const professor = { nome, curso, titulacao, ai };
+    axios
+      .put(`http://localhost:3005/professor/update/${id}`, professor)
+      .then((response) => {
+        alert(`Professor ${response.data.nome} atualizado com sucesso!`);
+        navigate("/listarProfessor");
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleCheckbox = (event) => {

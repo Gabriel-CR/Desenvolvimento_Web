@@ -13,16 +13,27 @@ import {
   Checkbox,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Cadastrar = () => {
   const [nome, setNome] = useState(""); // textfield
   const [curso, setCurso] = useState("");
   const [titulacao, setTitulacao] = useState("GRAD");
   const [ai, setAi] = useState({ cg: false, mc: false, al: false, es: false });
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ nome, curso, titulacao, ai });
+    // console.log({ nome, curso, titulacao, ai });
+    const professor = { nome, curso, titulacao, ai };
+    axios
+      .post(`http://localhost:3005/professor/register`, professor)
+      .then((response) => {
+        alert(`Professor ${response.data.nome} criado com sucesso!`);
+        navigate("/listarProfessor");
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleCheckbox = (event) => {

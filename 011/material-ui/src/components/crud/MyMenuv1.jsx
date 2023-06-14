@@ -14,6 +14,7 @@ import { useState } from "react";
 
 const MyMenu = () => {
   const [anchorElProfessor, setAnchorElProfessor] = useState(null);
+  const [anchorElAluno, setAnchorElAluno] = useState(null);
 
   const handleOpenAnchorElProfessor = (event) => {
     setAnchorElProfessor(event.currentTarget);
@@ -21,6 +22,14 @@ const MyMenu = () => {
 
   const handleCloseAnchorElProfessor = () => {
     setAnchorElProfessor(null);
+  };
+
+  const handleOpenAnchorElAluno = (event) => {
+    setAnchorElAluno(event.currentTarget);
+  };
+
+  const handleCloseAnchorElAluno = () => {
+    setAnchorElAluno(null);
   };
 
   const dropProfMenu = () => {
@@ -48,6 +57,39 @@ const MyMenu = () => {
             onClick={handleCloseAnchorElProfessor}
             component={Link}
             to="listarProfessor"
+          >
+            Listar
+          </MenuItem>
+        </Menu>
+      </Box>
+    );
+  };
+
+  const dropAlunosMenu = () => {
+    return (
+      <Box>
+        <Button
+          sx={{ color: "white", my: 2 }}
+          onClick={handleOpenAnchorElAluno}
+        >
+          Alunos
+        </Button>
+        <Menu
+          anchorEl={anchorElAluno}
+          open={Boolean(anchorElAluno)}
+          onClose={handleCloseAnchorElAluno}
+        >
+          <MenuItem
+            onClick={handleCloseAnchorElAluno}
+            component={Link}
+            to="cadastrarAluno"
+          >
+            Cadastrar
+          </MenuItem>
+          <MenuItem
+            onClick={handleCloseAnchorElAluno}
+            component={Link}
+            to="listarAluno"
           >
             Listar
           </MenuItem>
@@ -85,7 +127,7 @@ const MyMenu = () => {
             }}
           >
             {dropProfMenu()}
-            <Button sx={{ color: "white", my: 2 }}>Alunos</Button>
+            {dropAlunosMenu()}
             <Button sx={{ color: "white", my: 2 }}>Sobre</Button>
           </Box>
         </Toolbar>

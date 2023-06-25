@@ -6,7 +6,7 @@ import axios from "axios";
 const Cadastrar = () => {
   const [nome, setNome] = useState("");
   const [curso, setCurso] = useState("");
-  const [ira, setIra] = useState("");
+  const [ira, setIra] = useState("0.0");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -50,14 +50,18 @@ const Cadastrar = () => {
           onChange={(event) => setCurso(event.target.value)}
         />
         <TextField
+          margin="normal"
           required
           fullWidth
-          margin="normal"
-          label="Ira"
           id="ira"
+          label="IRA"
           name="ira"
-          value={ira}
-          onChange={(event) => setIra(event.target.value)}
+          type="number"
+          inputProps={{
+            maxLength: 10,
+            step: "0.1",
+          }}
+          onChange={(e) => setIra(parseFloat(e.target.value))}
         />
 
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>

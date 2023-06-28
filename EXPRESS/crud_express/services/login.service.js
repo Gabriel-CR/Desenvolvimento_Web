@@ -2,10 +2,10 @@ const LoginModel = require("../models/login.models");
 
 let logins = [
   { id: 0, login: "admin", senha: "admin" },
-  { id: 0, login: "teste", senha: "1234" },
+  { id: 1, login: "teste", senha: "1234" },
 ];
 
-let id = 1;
+let id = 2;
 
 class LoginService {
   static signin(data) {

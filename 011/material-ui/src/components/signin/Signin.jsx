@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Link,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,10 +15,9 @@ const Signin = () => {
       .then((res) => {
         console.log(res.data.res);
         if (res.data.res) {
-          console.log("deu bom");
           navigate("/listarAluno");
         } else {
-          console.log("deu ruim");
+          alert("senha incorreta");
         }
       })
       .catch((err) => {
@@ -72,21 +64,6 @@ const Signin = () => {
         <Button fullWidth variant="contained" sx={{ my: 2 }} onClick={login}>
           Sign in
         </Button>
-        {/* <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <Link underline="none" href="#">
-            Esqueceu a senha?
-          </Link>
-          <Link underline="none" href="#">
-            Cadastre-se!
-          </Link>
-        </Box> */}
       </Box>
     </Container>
   );

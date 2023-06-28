@@ -1,6 +1,5 @@
 class LoginModel {
-  constructor(id, login, senha) {
-    this.id = id;
+  constructor(login, senha) {
     this.login = login;
     this.senha = senha;
   }

@@ -8,17 +8,25 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
 
   const login = () => {
     const login = { email, senha };
     axios
       .post(`http://localhost:3005/login/signin`, login)
       .then((res) => {
-        console.log("deu bom");
+        console.log(res.data.res);
+        if (res.data.res) {
+          console.log("deu bom");
+          navigate("/listarAluno");
+        } else {
+          console.log("deu ruim");
+        }
       })
       .catch((err) => {
         console.log("deu ruim");
@@ -64,7 +72,7 @@ const Signin = () => {
         <Button fullWidth variant="contained" sx={{ my: 2 }} onClick={login}>
           Sign in
         </Button>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -78,7 +86,7 @@ const Signin = () => {
           <Link underline="none" href="#">
             Cadastre-se!
           </Link>
-        </Box>
+        </Box> */}
       </Box>
     </Container>
   );

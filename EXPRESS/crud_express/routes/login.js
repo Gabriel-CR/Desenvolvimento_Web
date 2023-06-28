@@ -8,7 +8,8 @@ var router = express.Router();
 // });
 
 router.post("/signin", (req, res, next) => {
-  LoginService.signin(req, res);
+  const stt = LoginService.signin(req.body);
+  res.json(stt);
 });
 
 module.exports = router;

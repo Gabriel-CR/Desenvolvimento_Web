@@ -6,7 +6,6 @@ let id = 1;
 
 class LoginService {
   static signin(data) {
-    console.log(data);
     for (let i = 0; i < logins.length; i++) {
       if (logins[i].email == data.login && logins[i].senha == data.senha) {
         return { res: true };

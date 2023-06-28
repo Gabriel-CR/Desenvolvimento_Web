@@ -49,9 +49,9 @@ router.put("/update/:id", (req, res, next) => {
   AlunoService.update(req, res);
 });
 
-router.get("/retrive/:id", (req, res, next) => {
-  const out = professorService.retrive(req.params.id);
-  res.json(out);
-});
+// router.get("/retrive/:id", (req, res, next) => {
+//   const out = professorService.retrive(req.params.id);
+//   res.json(out);
+// });
 
 module.exports = router;

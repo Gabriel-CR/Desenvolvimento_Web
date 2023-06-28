@@ -8,6 +8,9 @@ import ListarProfessor from "./professor/Listar";
 import CadastrarAluno from "./aluno/Cadastrar";
 import EditarAluno from "./aluno/Editar";
 import ListarAluno from "./aluno/Listar";
+import AlunoAprovado from "./aluno/AlunoAprovado";
+
+import Signin from "../signin/Signin";
 
 const MainPage = () => {
   return (
@@ -22,6 +25,8 @@ const MainPage = () => {
         }}
       >
         <Routes>
+          <Route path="/" element={<Signin />} />
+
           <Route path="/cadastrarProfessor" element={<CadastrarProfessor />} />
           <Route path="listarProfessor" element={<ListarProfessor />} />
           <Route path="editarProfessor/:id" element={<EditarProfessor />} />
@@ -29,6 +34,7 @@ const MainPage = () => {
           <Route path="cadastrarAluno" element={<CadastrarAluno />} />
           <Route path="listarAluno" element={<ListarAluno />} />
           <Route path="editarAluno/:id" element={<EditarAluno />} />
+          <Route path="alunoAprovado" element={<AlunoAprovado />} />
         </Routes>
       </Container>
     </BrowserRouter>

@@ -38,39 +38,39 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Listar = () => {
+const AlunoAprovado = () => {
   const [alunos, setAlunos] = useState([]);
   const [media, setMedia] = useState(0);
 
   useEffect(() => {
     axios
       .get(`http://localhost:3005/aluno/listar`)
-      .then((response) => setAlunos(response.data))
+      .then((response) => {
+        /*
+         * Recebe a resposta da requisição e não coloca na variável alunos
+         * pois iremos fazer algumas operações com os dados antes de setar o valor
+         * do estado alunos
+         */
+        const alns = response.data;
+        /*
+         * Soma a nota dos alunos usando o método reduce
+         * e divide pelo número de alunos para calcular a média
+         */
+        const m = alns.reduce((acc, aluno) => acc + aluno.ira, 0) / alns.length;
+        /*
+         * Filtra os alunos com IRA maior que a média
+         * calculado anteriormente
+         */
+        const alunosAprovados = alns.filter((aluno) => aluno.ira > m);
+
+        /*
+         * Seta os valores de media e alunos para serem usados na interface
+         */
+        setMedia(m);
+        setAlunos(alunosAprovados);
+      })
       .catch((error) => console.log(error));
   }, []);
-
-  /*
-   * Observa se a lista de alunos foi modificada
-   * Se sim, chama a função calcularMedia para recalcular a média
-   * e atualizar o valor da variável media
-   * Se não, não faz nada
-   */
-  useEffect(() => {
-    calcularMedia();
-  }, [alunos]);
-
-  /*
-   * Função que calcula a média dos IRAs dos alunos
-   * Tem que ser executada após a lista de alunos ser obtida do banco de dados
-   * e sempre que a lista de alunos for alterada
-   * Usa o reduce para percorrer a lista de alunos e somar os IRAs
-   * logo após divide pelo tamanho da lista de alunos
-   */
-  const calcularMedia = () => {
-    const m = alunos.reduce((acc, aluno) => acc + aluno.ira, 0) / alunos.length;
-    setMedia(m);
-    return m;
-  };
 
   const deleteAlunoById = (id) => {
     if (window.confirm("Deseja excluir")) {
@@ -83,11 +83,10 @@ const Listar = () => {
         .catch((error) => console.log(error));
     }
   };
-
   return (
     <>
       <Typography variant="h5" fontWeight="bold">
-        Listar Aluno
+        Listar Aluno Aprovados
       </Typography>
       <TableContainer component={Paper} sx={{ mt: 4, mb: 4 }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -105,20 +104,7 @@ const Listar = () => {
               return (
                 <StyledTableRow key={_id}>
                   <StyledTableCell>{_id}</StyledTableCell>
-                  {/*
-                   * Se o ira do aluno for menor que a média, pinta o nome de vermelho
-                   * Se não, não pinta
-                   * A média é obtida da variável media que é atualizada
-                   * sempre que a lista de alunos é alterada
-                   */}
-                  {ira < media ? (
-                    <StyledTableCell sx={{ color: "red" }}>
-                      {nome}
-                    </StyledTableCell>
-                  ) : (
-                    <StyledTableCell>{nome}</StyledTableCell>
-                  )}
-
+                  <StyledTableCell>{nome}</StyledTableCell>
                   <StyledTableCell>{curso}</StyledTableCell>
                   <StyledTableCell>{ira}</StyledTableCell>
                   <StyledTableCell>
@@ -161,4 +147,4 @@ const Listar = () => {
   );
 };
 
-export default Listar;
+export default AlunoAprovado;
